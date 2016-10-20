@@ -1,5 +1,5 @@
 import scrapy
-from scrapy.spider import BaseSpider
+from scrapy.spiders import BaseSpider
 from scrapy.selector import HtmlXPathSelector
 from simple_crawler.items import simple_crawlerItem
 
