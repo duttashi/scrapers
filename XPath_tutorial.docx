@@ -1,0 +1,50 @@
+# Major points taken from http://www.w3schools.com/xml/xpath_syntax.asp
+
+Expression	  Description
+----------  ---------------------------------------------------------------------------------------------------  
+nodename	  Selects all nodes with the name "nodename"
+/	          Selects from the root node
+//	        Selects nodes in the document from the current node that match the selection no matter where they are
+.	          Selects the current node
+..	        Selects the parent of the current node
+@         	Selects attributes
+
+In the table below we have listed some path expressions and the result of the expressions:
+Path Expression	Result
+
+bookstore	  Selects all nodes with the name "bookstore"
+/bookstore	Selects the root element bookstore
+Note: If the path starts with a slash ( / ) it always represents an absolute path to an element!
+
+bookstore/book	Selects all book elements that are children of bookstore
+//book        	Selects all book elements no matter where they are in the document
+bookstore//book	Selects all book elements that are descendant of the bookstore element, no matter where they are under the bookstore element
+//@lang	        Selects all attributes that are named lang
+
+
+Predicates
+------------
+Predicates are used to find a specific node or a node that contains a specific value.
+Predicates are always embedded in square brackets.
+In the table below we have listed some path expressions with predicates and the result of the expressions:
+
+Path Expression	         Result
+/bookstore/book[1]        Selects the first book element that is the child of the bookstore element.
+/bookstore/book[last()]
+
+Selecting Unknown Nodes
+-------------------------------
+Wildcard      Description
+*	          Matches any element node
+@*	        Matches any attribute node
+node()	    Matches any node of any kind
+
+Selecting Several Paths
+------------------------
+By using the | operator in an XPath expression you can select several paths.
+
+Path Expression	                Result
+//book/title | //book/price	    Selects all the title AND price elements of all book elements
+//title | //price	              Selects all the title AND price elements in the document
+/bookstore/book/title | //price	Selects all the title elements of the book element of the bookstore element AND all the price elements in the document
+
