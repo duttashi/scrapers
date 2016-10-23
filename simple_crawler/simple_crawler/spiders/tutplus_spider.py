@@ -15,9 +15,10 @@ class tutplus_spider(scrapy.Spider):
     allowed_domains = ["code.tutsplus.com"]
     start_urls = ["http://code.tutsplus.com/"]
 
-    def parse(self, response):
-        titles = response.xpath('//a[contains(@class, "posts__post-title")]/h1/text()').extract()
-        for title in titles:
-            item = simple_crawlerItem()
-            item["title"] = title
-            yield item
+
+def parse(self, response):
+    titles = response.xpath('//a[contains(@class, "posts__post-title")]/h1/text()').extract()
+    for title in titles:
+        item = simple_crawlerItem()
+        item["title"] = title
+        yield item
