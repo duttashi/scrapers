@@ -9,6 +9,8 @@ from scrapy.item import Item, Field
 
 
 class simple_crawlerItem(Item):
-    title = Field()
-    link = Field()
-    live_timestamp = Field()
+    # title = Field()
+    # link = Field()
+    # live_timestamp = Field()
+    descr = Field()
+    price = Field()
