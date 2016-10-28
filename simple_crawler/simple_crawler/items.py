@@ -12,5 +12,8 @@ class simple_crawlerItem(Item):
     # title = Field()
     # link = Field()
     # live_timestamp = Field()
-    descr = Field()
-    price = Field()
+    description = Field()
+    location = Field()
+    review = Field()
+
+    # price = Field()

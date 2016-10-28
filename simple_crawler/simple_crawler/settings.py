@@ -9,7 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'myspider3'
+BOT_NAME = 'hungryspider'
 
 SPIDER_MODULES = ['simple_crawler.spiders']
 NEWSPIDER_MODULE = 'simple_crawler.spiders'
@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'simple_crawler.spiders'
 # USER_AGENT = 'simple_crawler (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
