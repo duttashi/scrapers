@@ -12,6 +12,10 @@ class simple_crawlerItem(Item):
      title = Field()
      url = Field()
      submitted = Field()
+     post_title = Field()
+     post_time = Field()
+     text = Field()
+     link = Field()
 
 
     # price = Field()
