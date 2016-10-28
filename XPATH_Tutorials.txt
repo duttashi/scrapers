@@ -1,0 +1,5 @@
+Tutorials on XPATH
+-------------------
+a. https://blog.scrapinghub.com/2016/10/27/an-introduction-to-xpath-with-examples/ [easy to understand and good]
+b. https://blog.scrapinghub.com/2014/07/17/xpath-tips-from-the-web-scraping-trenches/ [slightly advanced]
+c. http://zvon.org/comp/r/tut-XPath_1.html [complete tuts]
