@@ -7,7 +7,7 @@ from scrapy.http import Request
 import csv
 from scrapy.spiders import BaseSpider
 from scrapy.selector import Selector
-from simple_crawler.items import simple_crawlerItem
+from ..items import simple_crawlerItem
 
 
 class ebay_spider(scrapy.Spider):
