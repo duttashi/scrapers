@@ -9,13 +9,16 @@ from scrapy.item import Item, Field
 
 
 class simple_crawlerItem(Item):
-     title = Field()
-     url = Field()
-     submitted = Field()
-     post_title = Field()
-     post_time = Field()
-     text = Field()
-     link = Field()
+    # title = Field()
+    # url = Field()
+    # submitted = Field()
+    # post_title = Field()
+    # post_time = Field()
+    # text = Field()
+    # link = Field()
+    # td=Field()
+    descr = Field()
+    price = Field()
 
 
     # price = Field()

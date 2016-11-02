@@ -9,7 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'blogpostscraper'
+BOT_NAME = 'ebay_spider'  # Add here the name of the bot as specified in the *spider.py file
 
 SPIDER_MODULES = ['simple_crawler.spiders']
 NEWSPIDER_MODULE = 'simple_crawler.spiders'
@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'simple_crawler.spiders'
 # USER_AGENT = 'simple_crawler (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
