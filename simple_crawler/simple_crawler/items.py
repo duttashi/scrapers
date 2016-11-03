@@ -19,6 +19,8 @@ class simple_crawlerItem(Item):
     # td=Field()
     descr = Field()
     price = Field()
+    saletag = Field()
+    saletagalert = Field()
 
 
     # price = Field()
