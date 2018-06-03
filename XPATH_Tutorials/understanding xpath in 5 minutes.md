@@ -52,7 +52,7 @@ To learn XPath for web data scraping.
 ### Testing the XPath
 
 If using Google Chrome then install the `XPath Helper` [addon](https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl) written by `Adam Sadovsky` from Chrome Store. Once installed, you may have to restart the browser. 
-Now the icon for XPath Helper will appear on the top right most side of the Chrome browser. Just click on it to open the helper. 
+Now the icon for XPath Helper will appear on the top right most side of the Chrome browser. Just click on it to open the helper window. 
 
 ### How to locate XPath in a webpage
 
