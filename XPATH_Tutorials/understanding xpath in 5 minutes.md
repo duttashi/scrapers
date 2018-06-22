@@ -52,7 +52,6 @@ To learn XPath for web data scraping.
 ### Testing the XPath
 
 If using Google Chrome then install the `XPath Helper` [addon](https://chrome.google.com/webstore/detail/xpath-helper/hgimnogjllphhhkhlmebbmlgjoejdpjl) written by `Adam Sadovsky` from Chrome Store. Once installed, you may have to restart the browser. 
-Now the icon for XPath Helper will appear on the top right most side of the Chrome browser. Just click on it to open the helper. 
 
 ### How to locate XPath in a webpage
 
@@ -71,7 +70,3 @@ Repeat step (2) to close the console.
 *Note: If the console gets in your way, hold down Shift and then move your mouse over it; it will move to the opposite side of the page.*
 
 *One word of caution: When rendering HTML tables, Chrome inserts artificial `<tbody>` tags into the DOM, which will consequently show up in queries extracted by this extension.*
-
-#### Reference
-
-For more details refer to [this page](http://zvon.org/comp/r/tut-XPath_1.html?utm_medium=referral&utm_campaign=ZEEF&utm_source=https%3A%2F%2Fscrapy.zeef.com%2Felias.dorneles#Pages~List_of_XPaths).
