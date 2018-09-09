@@ -1,6 +1,0 @@
-Objective: To create an automated crawler that can extract the restaurant listings including offers and deals in Kuala Lumpur
-Website to crawl: http://hungrygowhere.my
-Tasks TO DO:
-a. Use regular expression to clean the data
-b. Get the user ratings and reviews
-c. Create a data pipeline
