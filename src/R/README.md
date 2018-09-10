@@ -2,4 +2,4 @@ This folder contains scripts for web data crawlers written in `R` programming la
 
 
 *Copyright* 
-Ashish Dutt `ashishdutt@yahoo.com.my` 2018
+Ashish Dutt `ashishdutt@yahoo.com.my` 2018-2028
