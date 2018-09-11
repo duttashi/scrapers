@@ -15,3 +15,4 @@ pom.xml.asc
 *.ipynb_checkpoints
 
 .Rproj.user
+*.cpython-36.pyc
