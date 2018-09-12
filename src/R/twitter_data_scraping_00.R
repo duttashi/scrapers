@@ -1,7 +1,6 @@
 # Note: As per the documentation, you'll need to authenticate the twitter account api first. Once authentication is done, there is no need to do it each time you execute the program, unlike in python this is a must process.
 ## search for 18000 tweets using the rstats hashtag
 # see this link for languages supported by twitter, https://developer.twitter.com/en/docs/twitter-for-websites/twitter-for-websites-supported-languages/overview.html
-# Reference for rtweets package: https://mkearney.github.io/nicar_tworkshop/#38
 # create an external search string variable and then pass it to search_tweets()
 
 # clean the workspace
@@ -16,7 +15,6 @@ library(stopwords)
 library(rtweet) # for search_tweets()
 
 # Create a function that will accept multiple hashtags and will search the twitter api for related tweets
-# For below code, see this github thread https://github.com/mkearney/rtweet/issues/98
 
 search_tweets_queries <- function(x, n = 100, ...) {
   ## check inputs
@@ -41,7 +39,7 @@ search_tweets_queries <- function(x, n = 100, ...) {
 ## create data frame with query column
 df_query <- data.frame(
   query = c("KTM", "monorail","MRT"),
-  #query = c("IIUM","CSEandMe","DokgoRewindxSehun"),
+  #query = c("section377"),
   n = rnorm(3), # change this number according to the number of searchwords in parameter query. As of now, the parameter got 3 keywords, therefore this nuber is set to 3.
   stringsAsFactors = FALSE
 )
@@ -129,10 +127,10 @@ word_freq
 # list languages for a specific source
 #stopwords::stopwords_getlanguages("stopwords-iso")
 
-# use stopwords-iso list as it contains stopwords for bahasa indonesia which is very similar to bahasa melayu
+# use stopwords-iso list 
 clean_tweets %>%
-  # remove the stopwords in bahasa indonesia
-  anti_join(get_stopwords(language="id", source="stopwords-iso")) %>%
+  # remove the stopwords in bahasa melayu. Use `ms` for BM. See this reference for other language codes: https://en.wikipedia.org/wiki/ISO_639-1
+  anti_join(get_stopwords(language="ms", source="stopwords-iso")) %>%
   # remove the stopwords in english
   anti_join(get_stopwords(language="en", source="stopwords-iso")) %>%
   count(word, sort=TRUE) %>%
