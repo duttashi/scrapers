@@ -5,7 +5,7 @@
 [![Interested](https://img.shields.io/github/stars/duttashi/scrapers.svg)](https://github.com/duttashi/scrapers/stargazers)
 [![License](https://img.shields.io/github/license/duttashi/scrapers.svg)](https://github.com/duttashi/scrapers/blob/master/LICENSE)
 
-# Scraping
+# Scrapers
 This repository contains scripts for web data scrapers written in `Python` and `R` programming languages.
 
 ### General information
@@ -18,8 +18,6 @@ All experiments are conducted in branch, `develop`. If the experiment is success
 
 #### Contact
 If you'd like to contact me regarding bugs, questions, or general consulting, feel free to drop me a line at `ashishdutt@yahoo.com.my`
-
-*Copyright 2016-2026 [Ashish Dutt](https://duttashi.github.io/).*
 
 <p align="center">
 <a href="https://www.paypal.me/ashishdutt">
