@@ -129,7 +129,7 @@ word_freq
 
 # use stopwords-iso list 
 clean_tweets %>%
-  # remove the stopwords in bahasa melayu. Use `ms` for BM. See this reference for other language codes: https://en.wikipedia.org/wiki/ISO_639-1
+  # remove the stopwords in Bahasa Melayu (BM). Use `ms` for BM. See this reference for other language codes: https://en.wikipedia.org/wiki/ISO_639-1
   anti_join(get_stopwords(language="ms", source="stopwords-iso")) %>%
   # remove the stopwords in english
   anti_join(get_stopwords(language="en", source="stopwords-iso")) %>%
@@ -141,5 +141,5 @@ clean_tweets %>%
   ylab(paste('Word count'))+
   ggtitle(paste('Most common words in tweets')) +
   theme(legend.position="none") +
-  #theme_minimal()+
+  theme_minimal()+
   coord_flip()
