@@ -6,7 +6,10 @@
 # More drafts can be found at the bottom of this page: https://www.eliteprospects.com/draft/nhl-entry-draft
 # draft_year are Seasons for which the user wants to scrape data. Must be of the form 2018, 1996, etc -- only  a single 4-digit number.
 
+# clean the workspace
+rm(list = ls())
 
+# load the required libraries
 library(rvest)
 
 # LOGIC: First create test example to check if the idea works. Then put it all in a function
@@ -47,6 +50,8 @@ library(rvest)
 
 # The above logic works. Wraping it in a function
 
+# For CSS, use the selector gadget from here: ftp://cran.r-project.org/pub/R/web/packages/rvest/vignettes/selectorgadget.html
+
 get_draft_data<- function(draft_type, draft_year){
   
   # replace the space between words in draft type with a '-'
@@ -78,8 +83,57 @@ get_draft_data<- function(draft_type, draft_year){
     stringr::str_squish() %>%
     tibble::as_tibble()
   
-  # Join both the dataframe's together. Note both dataframes have uneven rows. So using merge
-  all_data<- cbind(draft_team, draft_player)  
+  # Extract the seasons data
+  draft_season<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes(".seasons") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Extract the gp data
+  draft_gp<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes("#drafted-players .gp") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Extract the g data
+  draft_g<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes("#drafted-players .g") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Extract the a data
+  draft_a<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes("#drafted-players .a") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Extract the tp data
+  draft_tp<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes("#drafted-players .tp") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Extract the PIM data
+  draft_pim<- page %>%
+    # use selector gadget to determine the relevant css
+    rvest::html_nodes(".pim") %>%
+    rvest::html_text()%>%
+    stringr::str_squish() %>%
+    tibble::as_tibble()
+  
+  # Join the dataframe's together. 
+  all_data<- cbind(draft_team, draft_player,draft_season, draft_gp,draft_g,
+                   draft_a,draft_tp,draft_pim)  
   
   return(all_data)
   
@@ -87,16 +141,13 @@ get_draft_data<- function(draft_type, draft_year){
 
 
 # Testing the function
-draft_data<-get_draft_data("nhl entry draft", 2018)
-draft_data
+draft_data<-get_draft_data("nhl entry draft", 2011)
+View(draft_data)
 
-draft_data<- get_draft_data("CWHL Draft","2018")
+draft_data<- get_draft_data("CWHL Draft","2012")
 View(draft_data)
 
 # Further improvement idea: Rather than user input, iterate through a list of draft teams and years to scrape the data.
-
-
-
-
-
-
+# draft_year<- c(1963:2018)
+# draft_year
+draft_year<- c(2014:2018)
