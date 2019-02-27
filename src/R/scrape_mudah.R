@@ -17,7 +17,7 @@ library(stringr)
 # page url construction
 base_url <- "https://www.mudah.my/malaysia/for-sale"
 #pg_count <- 31235
-pg_count <- 100
+pg_count <- 500
 
 # Extract the ad data
 #reference: https://stackoverflow.com/questions/51706521/multiple-pages-in-rvest
