@@ -131,3 +131,4 @@ dotplot(results)
 predictions <- predict(fit.cart, df.test)
 table(predictions, df.test$itemPrice)
 #confusionMatrix(predictions, df.test$itemPrice)
+
