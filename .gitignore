@@ -18,3 +18,4 @@ pom.xml.asc
 *.cpython-36.pyc
 *.html
 *.Rhistory
+*.RData
