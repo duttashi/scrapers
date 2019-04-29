@@ -14,8 +14,14 @@ pom.xml.asc
 .nrepl-port
 *.ipynb_checkpoints
 
-.Rproj.user
 *.cpython-36.pyc
+*.cpython-37.pyc
+__init__.cpython-37.pyc
+__init__.py
+*.exe
+*.log
+*.cfg
 *.html
+.Rproj.user
 *.Rhistory
 *.RData
