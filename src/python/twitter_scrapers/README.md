@@ -1,1 +1,0 @@
-All twitter scrapers coded in python live in here.

@@ -1,1 +1,0 @@
-Anything related to automating a `browser` will live in this sub-folder
