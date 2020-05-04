@@ -11,18 +11,6 @@ This project uses the following IDE and python distribution:
 		
 - Python 3 distribution is Miniconda 3
 
-#### Script Naming Convention
-
-Every script will begin with a prefix of `scrp_`. Followed by a distinct meaningful name, that describe the task the script is meant to perform.
-
-**Note:** The prefix name must not exceed more than 4 characters excluding the hyphen sign.
-
-The scraper's are classified into 3 categories on the basis of their complexity. These are defined as follows;
-
-- **beginner level scraper**: script name begins with, `scrp_init_`. A beginner level scraper is a simple scraper with little to no object-oriented functionality. 
-- **intermediate level scraper**: script name begins with, `scrp_midl_`. An intermediate level scraper contains atomic methods.  
-- **advanced level scraper**: script name begins with, `scrp_advc_`. An advanced level scraper fully complies with the OOP principles. It has classes, inheritance and methods. 
-
 #### General Folder & Variable naming conventions
 
 This repository follows the [PEP 8](https://www.python.org/dev/peps/pep-0008/) standard for Python file and folder naming conventions. Also see the [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#3164-guidelines-derived-from-guidos-recommendations).
