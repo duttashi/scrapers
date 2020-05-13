@@ -3,29 +3,44 @@
 Created on Mon May 11 13:53:14 2020
 
 @author: Ashish
+Other websites for crawling: https://companies.naukri.com/ibm-jobs/data-scientist-jobs
+https://www.naukri.com/data-scientist-jobs?k=data%20scientist
 """
 
 from urllib.parse import urljoin
-
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 
 val = 2
-job_list = [] # initialise an empty list
+job_list = []  # initialise an empty list
 company_list = []
 rating_list = []
-counter = 2
+company_location_list = []
+advertpost_date_list = []
+jobpos_title_list = []
+
+counter = 1
+pages_to_scrape = 1
+
+url = 'https://www.indeed.com.my/data-scientist-jobs'
+session = requests.Session()
+response = session.get(url)
+soup = BeautifulSoup(response.content, "lxml")
+search_count = soup.find("div", id="searchCountPages")
+search_count = str(search_count)
+res = [int(i) for i in search_count.split() if i.isdigit()]
+# get the second number
+res = res[1]
+
 
 with requests.Session() as session:
     page_number = 1
     url = 'https://www.indeed.com.my/data-scientist-jobs'
     counter = 1
-    while (counter<3):
-        # print("Processing page: #{page_number}; url: {url}".format(page_number=page_number, url = url))
+    while (counter <= res):
         response = session.get(url)
         soup = BeautifulSoup(response.content, "lxml")
-
         # check if there is next page, break if not
         next_link = soup.find("span", class_="pn")
         # print(next_link)
@@ -39,73 +54,51 @@ with requests.Session() as session:
             # next_url = urljoin(url, "jobs?q=data+scientist&start=", val1)
             next_url = urljoin(url, rel_url)
             # print("next link: ", next_link)
-            print("Processing page: #{page_number}; url: {url}".format(page_number=page_number
-                                                                       , url=next_url))
+            print("Processing page: #{page_number}; url: {url}".format(
+                page_number=page_number, url=next_url))
             # get the page
             page_data = requests.get(next_url)
+
             # create soup
             soup = BeautifulSoup(page_data.content, "lxml")
-            # page_text = soup.get_text()
-            
-            # page_text = soup(page_data, "html.parser")
-            # print(page_text) # the page text is printing
-            # results = soup.find_all("div", attrs={"data-tn-component": "organicJob"})
-            # company_name = soup.find_all('a', class_ = "turnstileLink")
-            company_name = soup.find_all('span', class_ = "company")
-            company_rating = soup.find_all("span", class_ = "ratingsContent")
-            # print(results)
+            company_name = soup.find_all('span', class_="company")
+            company_rating = soup.find_all("span", class_="ratingsContent")
+            company_loc = soup.find_all(
+                "span", class_="location accessible-contrast-color-location")
+            advert_post_date = soup.find_all("span", class_="date")
+            # searching for multiple attribute values
+            jobpos = soup.find_all("a", class_=["jobtitle turnstileLink visited", 
+                                                "jobtitle turnstileLink"
+                                                ]
+                                   )
+            # append results to list
             for company in company_name:
                 company_list.append(company.text)
-            
             for rate in company_rating:
                 rating_list.append(rate.text)
-                # result.next_sibling
-            
-            # res = soup.find_all('span', class_ = "jobtitle turnstileLink visited")
-            # print(res)
-            # for result in res:
-            #     job_list.append(result)
-                
-                
-                
-            # results = soup.find_all("h2", _class="title")
-            # print(results)
-            # for result in results:
-            #     # check print statement
-            #     # print("job title is: ", result)
-            #     company_name = result.find_all("span", class_= "company")
-            #     job_title = result.find_all("a", class_= "jobtitle turnstileLink visited")
-            #     print("company name: ", company_name, " job title: ", job_title)
-            #     # append result to list
-            #     company_list.append(company_name)
-            #     job_list.append(job_title)
-                
-                    
-            
-            # find and store job titles
-            # for div in page_text.find_all(name="div", attrs={"data-tn-component": "organicJob"}):
-            #      for a in div.find_all(name="a", attrs={"data-tn-element": "jobTitle"}):
-            #          jobs.append(a["title"])
+            for loc in company_loc:
+                company_location_list.append(loc.text)
+            for postDate in advert_post_date:
+                advertpost_date_list.append(postDate.text)
+            for jobTitle in jobpos:
+                jobpos_title_list.append(jobTitle.text)
 
             page_number += 1
-            # # val *= page_number
-            # # write jobs list to disk for checking
-            # fh = open('myfile.csv', 'w+')
-            # fh.write(data)
-            # fh.close()
-            
-            # create a dictionary becuse some columns dont have values
-            data = dict({"Company name": company_list, 
-                                   "Company rating":rating_list})
-            
+            # Reference: See this So post: https://stackoverflow.com/questions/19736080/creating-dataframe-from-a-dictionary-where-entries-have-different-lengths
+            data = dict({"CompanyName": company_list,
+                         "CompanyRating": rating_list,
+                         "JobLocation": company_location_list,
+                         "AdvertPostDate": advertpost_date_list,
+                         "JobTitle": jobpos_title_list})
             # create dataframe
-            jobs_df = pd.DataFrame(dict([ (k,pd.Series(v)) for k,v in data.items() ]))
+            jobs_df = pd.DataFrame(
+                dict([(k, pd.Series(v)) for k, v in data.items()]
+                     )
+                )
             jobs_df.reset_index(drop=True)
-        counter+=1
-    
+        counter += 1
+
 print(jobs_df)
 # write dataframe to csv
 jobs_df.to_csv("../../data/jobs_df.csv", sep=',')
-
-
 print("Done.")
