@@ -11,6 +11,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+import mysql.connector
+from mysql.connector import errorcode
 
 val = 2
 job_list = []  # initialise an empty list
@@ -102,3 +104,37 @@ print(jobs_df)
 # write dataframe to csv
 jobs_df.to_csv("../../data/jobs_df.csv", sep=',')
 print("Done.")
+
+# write the scraped data to database
+try:
+    # open the database connection
+    cnx = mysql.connector.connect(user='root', password='ashoo',
+                                  host='localhost', database='db_practise')
+    insert_sql = ('INSERT INTO jobs VALUES (%s)')
+
+    # get listing data
+    listing_data = jobs_df
+
+    # loop through all listings executing INSERT for each with the cursor
+    cursor = cnx.cursor()
+    for listing in listing_data:
+        print('Storing data for %s' % (listing))
+        cursor.execute(insert_sql, (listing,))
+
+    # commit the new records
+    cnx.commit()
+
+    # close the cursor and connection
+    cursor.close()
+    cnx.close()
+
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print('Something is wrong with your username or password')
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print('Database does not exist')
+    else:
+        print(err)
+
+else:
+    cnx.close()
