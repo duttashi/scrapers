@@ -25,3 +25,6 @@ __init__.py
 .Rproj.user
 *.Rhistory
 *.RData
+/data/
+
+
