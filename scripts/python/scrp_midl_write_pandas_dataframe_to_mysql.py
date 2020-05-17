@@ -14,6 +14,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import requests
 import sqlalchemy
+import mysql.connector
+from sqlalchemy import create_engine
 import pandas as pd
 
 # Define global variables
@@ -108,6 +110,18 @@ def get_multiple_webpage_data(page_url, page_count):
     return jobs_df
 
 
+# create table in mysql database
+def create_table_in_database(mysql_engine):
+    # create database instance
+    # myconxn = mysql_engine.raw_connection()
+    myconxn = mysql_engine.connect()
+    # check if table exists then drop it
+    myconxn.execute("drop table if exists jobs")
+    # check if table does not exist then create one
+    myconxn.execute("create table jobs(sno int(4) UNSIGNED AUTO_INCREMENT PRIMARY KEY,company_name varchar(30), company_rating float(3), job_loc varchar(30), advert_postdate varchar(30),job_title varchar(30))")
+    print("Table created")
+
+
 def write_to_database(jobs_df):
     # write pandas dataframe to database
     jobs_df.to_sql(name='jobs', con=mysql_engine, if_exists='replace')
@@ -122,15 +136,16 @@ def read_from_database(jobs_df):
         for row in result:
             print(row)
 
+
 # invoke defined functions
-
-
-myurl = 'https://www.indeed.com.my/data-scientist-jobs'
-# myurl = "https://www.indeed.com.my/jobs?q=data+analyst&l="
-# myurl = "https://www.indeed.com.my/jobs?q=data+analyst+internship&l="
-page_count = count_job_pages(myurl)
-print(page_count)
-jobs_data = get_multiple_webpage_data(myurl, page_count)
-# print(jobs_data)
-write_to_database(jobs_data)
-read_from_database(jobs_data)
+if __name__ == '__main__':
+    myurl = 'https://www.indeed.com.my/data-scientist-jobs'
+    # myurl = "https://www.indeed.com.my/jobs?q=data+analyst&l="
+    # myurl = "https://www.indeed.com.my/jobs?q=data+analyst+internship&l="
+    page_count = count_job_pages(myurl)
+    print(page_count)
+    jobs_data = get_multiple_webpage_data(myurl, page_count)
+    # print(jobs_data)
+    create_table_in_database(mysql_engine)
+    write_to_database(jobs_data)
+    read_from_database(jobs_data)
