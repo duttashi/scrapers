@@ -33,7 +33,7 @@ for link in full_urls:
     
     gym_hrs_data = soup.find('div', class_="columns small-12 medium-6")
     gym_hrs = {p: p.text for p in gym_hrs_data.findAll('p')}
-    print(gym_hrs)
+    #print(gym_hrs)
     gym_hours.append(gym_hrs)
     
     
