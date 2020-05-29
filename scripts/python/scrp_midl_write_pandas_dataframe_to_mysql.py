@@ -14,8 +14,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import requests
 import sqlalchemy
-import mysql.connector
-from sqlalchemy import create_engine
+#import mysql.connector
+#from sqlalchemy import create_engine
 import pandas as pd
 
 # Define global variables
