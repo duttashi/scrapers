@@ -11,6 +11,6 @@ from bs4 import BeautifulSoup
 
 page = requests.get('https://www.meridianenergy.co.nz')
 soup = BeautifulSoup(page.content, 'html.parser')
-keywords_to_find = ['sustainable', 'renewable', 'electric cars']
+keywords_to_find = ['sustainable', 'renewable', 'electric car']
 results = soup.find_all(string=lambda text: text and any (x in text for x in keywords_to_find))
 print(results)  
