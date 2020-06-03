@@ -9,8 +9,6 @@ Created on Sun May 24 21:14:00 2020
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium import webdriver
-import pandas as pd
-
 
 products=[] #List to store name of the product
 prices=[] #List to store price of the product
