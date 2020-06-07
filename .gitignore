@@ -26,5 +26,9 @@ __init__.py
 *.Rhistory
 *.RData
 /data/
+*.pdf
+*.csv
+*.xlsx
+
 
 
