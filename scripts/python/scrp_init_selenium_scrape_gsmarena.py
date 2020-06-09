@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat May 30 16:43:03 2020
+Last modified: June 9th 2020 4:10 pm
 
 @author: Ashish
 """
@@ -13,11 +14,20 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import requests
-import csv
+import csv, os
+
 
 # create empty list to hold data
 phone_urls = []
 phone_urls_cmplt =[]
+phone_brand_urls = []
+phone_brand =[]
+phone_brand_urlcmplt = []
+phone_brand_urlcmplt_data = []
+
+# set working directory
+os.chdir('C:/Users/Ashoo/Documents/playground_python/scrapers/')
+#print(os.getcwd())
 
 # create object for chrome options
 chrome_options = Options()
@@ -49,10 +59,9 @@ for pdata in soup.find_all("a"):
     
     if(pdata.parent.name=="td"):
         href = pdata['href']
-        print(href)
+        #print(href)
         # add the urls to list
         phone_urls.append(href)
-#print(phone_urls)
         
 # Create complete urls from the phone_urls list
 base_url = "https://www.gsmarena.com/"
@@ -64,50 +73,76 @@ for url in phone_urls:
 # Iterate over the list having complete urls and browse the webpage
 # to get the necessary data
 
-phone_brand =[]
-phone_brand_urls = []
 
-for url in phone_urls_cmplt:
-    # get the page
-     page_data = requests.get(url)
+try:
+    for url in phone_urls_cmplt:
+        page_data = requests.get(url)
      # create soup
-     soup = BeautifulSoup(page_data.content, "lxml")
-     for pname in soup.find_all('div', class_="makers"):
-         for pdata in pname.findChildren('span'):
-             phone_brand.append(pdata.text)
-             #print(pdata)
-     for phurl in soup.find_all('table'):
-         for ptbldata in phurl.findChildren('td'):
-             for purl in phurl.findChildren('href'):
-                 print(purl)
-         # for phurl in pname.find_all('a'):
-         #     for purl in phurl.findChildren('href'):
-         #         print(purl)
-         #         complete_url = urljoin(base_url,purl)
-         #         print(complete_url)
-         #         phone_brand_urls.append(complete_url.text)
-                 # if(purl=="zte-phones-62.php"):
-                 #      break
-                 #  else:
-                 #      continue
-      # for span_text in soup.findChildren('span'):
-      #     print(span_text)
-            
-     #phone_name = soup.find_all('div', class_="makers")
-# write data to file
-with open('phone_brand_data.csv', mode="w", newline='\n') as myfile:
-     wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
-     wr.writerow(phone_brand)
+        soup = BeautifulSoup(page_data.content, "lxml")
+        for pname in soup.find_all('div', class_="makers"):
+            for pdata in pname.findChildren('span'):
+                # append phone brand to list
+                phone_brand.append(pdata.text)
+                #print(pdata.text)
+                # for pdata in pname.findChildren('href'):
+                #     print(pdata.text)
+except requests.exceptions.RequestException as e:
+    print(e)
+    pass
 
-with open('phone_brand_urldata.csv', mode="w", newline='\n') as myfile1:
-     wr = csv.writer(myfile1, quoting=csv.QUOTE_ALL)
-     wr.writerow(phone_brand_urls)
+# get all phone brand urls for each phone in the phone url list
+try:
+    for url in phone_urls_cmplt:
+        page_data = requests.get(url)
+     # create soup
+        soup = BeautifulSoup(page_data.content, "lxml")
+        for pname in soup.find_all('div', class_="makers"):
+            for pdata in pname.findChildren('a'):
+                href = pdata['href']
+                phone_brand_urls.append(href)
+                #print(href.text)
+       
+except requests.exceptions.RequestException as e:
+    print(e)
+    pass
+
+# Create complete urls from the phone brand urls list
+base_url = "https://www.gsmarena.com/"
+# join the base_url with the phone_urls
+for url in phone_brand_urls:
+    complete_url = urljoin(base_url, url)
+    print(complete_url)
+    phone_brand_urlcmplt.append(complete_url)
+    
+# get phone data from phone brand urls complete list
+try:
+    for url in phone_brand_urlcmplt:
+        page_data = requests.get(url)
+     # create soup
+        soup = BeautifulSoup(page_data.content, "lxml")
+        for pname in soup.find_all('table', class_="nfo"):
+            phone_brand_urlcmplt_data.append(pname.text)
+            print(pname)
+except requests.exceptions.RequestException as e:
+    print(e)
+    pass
+
+
+# write data to file
+with open('data/phone_brand_data.csv', mode="w", newline='') as myfile:
+      wr = csv.writer(myfile, delimiter='\n')
+      wr.writerow(phone_brand)
+    
+with open('data/phone_brand_urldata.csv', mode="w", newline='') as myfile1:
+      wr = csv.writer(myfile1, delimiter='\n')
+      wr.writerow(phone_brand_urlcmplt_data)
      
 
 #print(phone_urls_cmplt)
 myfile.close()
-myfile1.close()
+# myfile1.close()
 driver.close()
+print("complete")
 #print(phone_data)
 
 
