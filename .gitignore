@@ -29,6 +29,7 @@ __init__.py
 *.pdf
 *.csv
 *.xlsx
-
+*.ini
+*.bak
 
 
