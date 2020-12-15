@@ -25,7 +25,25 @@ Execute the following commands in command prompt window
 - To see the list of installed python packages, `> pip list`
 - To see the list of outdated python packages: `> pip list --outdated`
 - To upgrade a particular python package: `> pip install [package] --upgrade`. Substitute the `[package]` with `package name`.
-- To automatically generate the `requirements.txt` file, open a terminal window in the repository and type the command, `pip3 freeze > requirements.txt`. See this helpful [SO post](https://stackoverflow.com/questions/31684375/automatically-create-requirements-txt) on the same. 
+- To automatically generate the `requirements.txt` file, open a terminal window in the repository and type the command, `pip3 freeze > requirements.txt`. See this helpful [SO post](https://stackoverflow.com/questions/31684375/automatically-create-requirements-txt) on the same.
+- To generate the repository navigation structure, open a terminal window in the repository and type the command, `tree /f`. See this [SO post](https://stackoverflow.com/questions/23989232/is-there-a-way-to-represent-a-directory-tree-in-a-github-readme-md/62804058#62804058)
+
+### Repository navigation structure
+
+```
+├───data
+├───figures
+├───resources
+│   └───XPATH_Tutorials
+└───scripts
+    ├───python
+    │   └───scrapy_based_scrapers
+    │       │
+    │       ├───tutorial
+    │       │
+    │       └───web_crawl_automation
+    └───R
+```
 
 #### Contact
 If you'd like to contact me regarding bugs, questions, or general consulting, feel free to drop me a line at `ashishdutt@yahoo.com.my`
