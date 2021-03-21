@@ -31,5 +31,6 @@ __init__.py
 *.xlsx
 *.ini
 *.bak
+.spyproject
 
 
