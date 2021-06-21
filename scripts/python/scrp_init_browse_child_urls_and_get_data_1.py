@@ -8,12 +8,9 @@ Created on Thu Feb  4 21:53:53 2021
 #Import the packages
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
 import time
-
 import requests
 from bs4 import BeautifulSoup
-import array as arr
 import pandas
 #The first line import the Web Driver, and the second import Chrome Options
 #-----------------------------------#
@@ -112,3 +109,4 @@ data = {
 }
 df = pandas.DataFrame(data)
 df.to_csv( dataPath, index = False)
+print(df.head())
