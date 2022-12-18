@@ -12,9 +12,6 @@ import os
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
-from time import sleep
 
 data = []
 
@@ -43,7 +40,7 @@ chrome_options.add_argument("disable-infobars")
 chrome_options.add_experimental_option("prefs", { 
     "profile.default_content_setting_values.notifications": 2
     })
-driver = webdriver.Chrome("c:/tmp/chromedriver.exe",options = chrome_options)
+driver = webdriver.Chrome("c:/users/ashoo/documents/playground_python/chromedriver.exe",options = chrome_options)
 
 for url in final_list:
     data.append({})
