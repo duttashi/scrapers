@@ -32,5 +32,8 @@ __init__.py
 *.ini
 *.bak
 .spyproject
-
+*.pyc
+*.spyproject
+.idea
+*.zip
 
