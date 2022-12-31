@@ -35,5 +35,5 @@ __init__.py
 *.pyc
 *.spyproject
 .idea
-
+*.zip
 
